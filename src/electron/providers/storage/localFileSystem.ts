@@ -10,6 +10,11 @@ import { strings } from "../../../common/strings";
 export default class LocalFileSystem implements IStorageProvider {
     constructor(private browserWindow: BrowserWindow) { }
 
+    public initialize(): Promise<void> {
+        // Placeholder
+        return Promise.resolve();
+    }
+
     public selectContainer(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             const filePaths = dialog.showOpenDialog(this.browserWindow, {

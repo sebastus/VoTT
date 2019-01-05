@@ -18,6 +18,17 @@ export class LocalFileSystemProxy implements IStorageProvider, IAssetProvider {
         }
     }
 
+    public initialize() {
+        return new Promise<void>(async (resolve, reject) => {
+            try {
+                this.listFiles()
+                resolve();
+            } catch(e) {
+                reject(e);
+            }
+        });
+    }
+
     public selectContainer(): Promise<string> {
         return IpcRendererProxy.send(`${PROXY_NAME}:selectContainer`);
     }

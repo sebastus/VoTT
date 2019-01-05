@@ -184,6 +184,7 @@ export default class MockFactory {
 
     public static createStorageProvider(files: string[]): IStorageProvider {
         return {
+            initialize: jest.fn(),
             readText: jest.fn(() => Promise.resolve("Fake text")),
             readBinary: jest.fn(),
             deleteFile: jest.fn(),
@@ -197,11 +198,10 @@ export default class MockFactory {
         };
     }
 
-    public static createAssetProvider(): IAssetProvider {
+    public static createTestAssetProvider(): IAssetProvider {
         return {
-            getAssets(containerName?: string): Promise<IAsset[]> {
-                throw new Error("Method not implemented.");
-            },
+            initialize: jest.fn(),
+            getAssets: jest.fn(() => Promise.resolve(this.createTestAssets())),
         };
     }
 

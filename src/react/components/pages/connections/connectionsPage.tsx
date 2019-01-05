@@ -12,6 +12,7 @@ import "./connectionsPage.scss";
 import { strings } from "../../../../common/strings";
 import Confirm from "../../common/confirm/confirm";
 import { getStorageType } from "../../../../models/helpers";
+import { AssetProviderFactory } from "../../../../providers/storage/assetProvider"
 
 export interface IConnectionPageProps extends RouteComponentProps, React.Props<ConnectionPage> {
     connections: IConnection[];
@@ -122,6 +123,7 @@ export default class ConnectionPage extends React.Component<IConnectionPageProps
 
     private onFormSubmit = async (connection: IConnection) => {
         connection.connectionType = getStorageType(connection.providerType);
+        await AssetProviderFactory.createFromConnection(connection).initialize();
         await this.props.actions.saveConnection(connection);
         this.props.history.goBack();
     }

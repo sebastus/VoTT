@@ -24,6 +24,20 @@ export class BingImageSearch implements IAssetProvider {
         Guard.null(options);
     }
 
+    public initialize(): Promise<void> {
+        return new Promise<void>(async (resolve, reject) => {
+            try {
+                const assets = await this.getAssets();
+                if(assets.length === 0) {
+                    throw new Error("Search returned empty result")
+                }
+                resolve();
+            } catch(e) {
+                reject(e);
+            }
+        });
+    }
+
     public async getAssets(): Promise<IAsset[]> {
         const query = {
             q: this.options.query,

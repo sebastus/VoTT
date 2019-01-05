@@ -22,6 +22,9 @@ describe("Storage Provider Factory", () => {
 });
 
 class TestStorageProvider implements IStorageProvider {
+    public initialize(): Promise<void> {
+        throw new Error("Method not implemented");
+    }
     public readText(filePath: string): Promise<string> {
         throw new Error("Method not implemented.");
     }

@@ -52,15 +52,13 @@ describe("Asset Service", () => {
 
     describe("Instance Methods", () => {
         const testProject = MockFactory.createTestProject("TestProject");
-        const testAssets = MockFactory.createTestAssets(10);
+        const testAssets = MockFactory.createTestAssets();
         let assetService: AssetService = null;
         let assetProviderMock: IAssetProvider = null;
         let storageProviderMock: any = null;
 
         beforeEach(() => {
-            assetProviderMock = {
-                getAssets: () => Promise.resolve(testAssets),
-            };
+            assetProviderMock = MockFactory.createTestAssetProvider();
 
             storageProviderMock = {
                 readText: jest.fn((filePath) => {
